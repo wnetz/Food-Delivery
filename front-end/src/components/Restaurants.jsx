@@ -10,11 +10,6 @@ const Restaurants = () => {
   const [update,setUpdate] = useState(false)  
   const [add, setAdd] = useState(false)
   library.add(faPlus);
-
-  const bod = {
-      "address":"dghm",
-      "name":"lob"
-  };
   
   useEffect(() =>{  
     fetch("api/restaurant", {

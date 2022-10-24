@@ -1,6 +1,7 @@
 package com.food.FoodDelivery.controller;
 
 import com.food.FoodDelivery.entity.Dish;
+import com.food.FoodDelivery.repository.DishDto;
 import com.food.FoodDelivery.repository.RestaurantRepository;
 import com.food.FoodDelivery.service.DishService;
 import com.food.FoodDelivery.service.RestaurantService;
@@ -39,7 +40,7 @@ public class DishController
     }
 
     @GetMapping("/dishes")
-    public ResponseEntity<List<Dish>> getAllDishes()
+    public ResponseEntity<List<DishDto>> getAllDishes()
     {
         return new ResponseEntity<>(dishService.getAllDishes(), HttpStatus.OK);
     }
@@ -51,14 +52,14 @@ public class DishController
     }
 
     @DeleteMapping("/dishes/{id}")
-    public ResponseEntity<HttpStatus> deleteDish(@PathVariable("id") long id) {
+    public ResponseEntity<String> deleteDish(@PathVariable("id") long id) {
         dishService.deleteDishById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("dish deleted", HttpStatus.OK);
     }
 
     @DeleteMapping("/restaurant/{Restaurant_id}/dishes")
-    public ResponseEntity<HttpStatus> deleteAllDishesOfRestaurant(@PathVariable(value = "Restaurant_id") Long id) {
+    public ResponseEntity<String> deleteAllDishesOfRestaurant(@PathVariable(value = "Restaurant_id") Long id) {
         dishService.deleteAllDishesOfRestaurant(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("dish deleted", HttpStatus.OK);
     }
 }

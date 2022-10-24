@@ -17,7 +17,6 @@ public class Dish {
     private Long dishID;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "Restaurant_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Restaurant restaurant;
     @Column(name = "name")

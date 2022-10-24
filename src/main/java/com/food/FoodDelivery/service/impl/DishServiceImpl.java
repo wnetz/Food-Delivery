@@ -3,6 +3,7 @@ package com.food.FoodDelivery.service.impl;
 import com.food.FoodDelivery.entity.Dish;
 import com.food.FoodDelivery.entity.Restaurant;
 import com.food.FoodDelivery.exception.ResourceNotFoundException;
+import com.food.FoodDelivery.repository.DishDto;
 import com.food.FoodDelivery.repository.DishRepository;
 import com.food.FoodDelivery.repository.RestaurantRepository;
 import com.food.FoodDelivery.service.DishService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DishServiceImpl implements DishService
@@ -28,8 +30,8 @@ public class DishServiceImpl implements DishService
     }
 
     @Override
-    public List<Dish> getAllDishes() {
-        return dishRepository.findAll();
+    public List<DishDto> getAllDishes() {
+        return dishRepository.findAll().stream().map(dish -> new DishDto(dish.getDishID(),dish.getName(), dish.getPrice(),dish.getRestaurant())).collect(Collectors.toList());
     }
 
     @Override
@@ -56,7 +58,9 @@ public class DishServiceImpl implements DishService
 
     @Override
     public void deleteDishById(long id) {
-        dishRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Dish","Id",id));
+        Dish dish = dishRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Dish","Id",id));
+        Restaurant restaurant = restaurantRepository.findById(dish.getRestaurant().getRestaurantID()).orElseThrow(()->new ResourceNotFoundException("Restaurant","Id",dish.getRestaurant().getRestaurantID()));
+        restaurant.getDishes().remove(dish);
         dishRepository.deleteById(id);
     }
 
