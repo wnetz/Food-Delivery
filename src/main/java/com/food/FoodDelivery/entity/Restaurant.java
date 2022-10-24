@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Restaurant
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Restaurant_id", nullable = false)
     private Long restaurantID;
     @Column(name = "name")

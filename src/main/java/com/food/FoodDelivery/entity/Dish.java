@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "Dishes")
 public class Dish {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Dish_id", nullable = false)
     private Long dishID;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

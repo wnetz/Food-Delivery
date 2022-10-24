@@ -1,0 +1,22 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(185, 130, 194);
+    align-items: center;
+    padding: 16px 32px;
+}
+
+.navbar_link{
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    margin-right: 16px;
+    padding: 4px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    padding: 12px 10px;
+    border-bottom: 2px solid rgb(87, 61, 91);
+
+}
+.navbar_link:hover{
+    border-bottom: 2px solid rgb(237, 162, 248);
+}
