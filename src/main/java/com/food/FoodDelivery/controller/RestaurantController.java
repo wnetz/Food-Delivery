@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -42,6 +44,14 @@ public class RestaurantController
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable("id") long id)
     {
         return new ResponseEntity<>(restaurantService.updateRestaurant(restaurant,id), HttpStatus.OK);
+    }
+
+    @PutMapping("{id}/file")
+    public ResponseEntity<String> addFile(@PathVariable("id") long id, @RequestParam("file") MultipartFile file)
+    {
+        System.out.println("XXXXXX "+file.getContentType());
+        restaurantService.addFile(id,file);
+        return new ResponseEntity<>("Restaurant deleted", HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

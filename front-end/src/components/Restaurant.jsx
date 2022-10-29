@@ -49,7 +49,8 @@ const Restaurant = ({restaurant, update}) => {
         <td className="restaurant-field">{id}</td>
         {!edit && <>
           <td className="restaurant-field">{name}</td>
-          <td className="restaurant-field">{address}</td>
+          <td className="restaurant-field">{address}</td>            
+          <td>file</td>
           <td>
             <button onClick={showEdit}>edit</button>
           </td>
@@ -60,7 +61,8 @@ const Restaurant = ({restaurant, update}) => {
           </td>
           <td className="restaurant-field">
             <input id="rAddress" type="text" defaultValue={address}/>
-          </td>
+          </td>          
+          <td>file</td>
           <td>
             <button onClick={updateRestaurant}>save</button>
             <button onClick={deleteRestaurant}>delete</button>

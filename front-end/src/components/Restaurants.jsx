@@ -32,6 +32,9 @@ const Restaurants = () => {
   }
 
   const addRestaurant = () => {
+    const formData = new FormData();
+    formData.append('file', document.querySelector('input[type="file"]').files[0]);
+    console.log(formData.get("file"),document.querySelector('input[type="file"]').files[0])
     const bod = {
       "address":document.getElementById("nrAddress").value,
       "name":document.getElementById("nrName").value
@@ -44,7 +47,13 @@ const Restaurants = () => {
       body : JSON.stringify(bod)
     })
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      console.log(data["restaurantID"])
+      fetch(`api/restaurant/${data["restaurantID"]}/file`, {
+        method: "put",
+        body : formData
+      })
+    });
     restaurantUpdate()
     showAdd()
   }
@@ -57,6 +66,7 @@ const Restaurants = () => {
               <th className="restaurant-field">ID</th>
               <th className="restaurant-field">Name</th>
               <th className="restaurant-field">Address</th>
+              <th className="restaurant-field">license</th>
               <th>
                 <button className = "add-btn" onClick={showAdd}>
                   <FontAwesomeIcon icon={"plus"} />
@@ -75,7 +85,10 @@ const Restaurants = () => {
               <td className="restaurant-field">
                 <input id="nrAddress" type="text" />
               </td>
-              <td>
+              <td className="restaurant-field">
+                <input id="nrLicense" type="file" required accept=".doc,.docx,.pdf"/>
+              </td>
+              <td className="restaurant-field">
                 <button onClick={addRestaurant}>save</button>
               </td>
               </tr>}
