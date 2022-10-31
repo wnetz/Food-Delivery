@@ -18,7 +18,6 @@ function App()
         <Route path="/Restaurants" element={<Restaurants />} />
         <Route path="/Dishes" element={<Dishes/>} />
       </Routes>
-      <h1>osdfijghohigu;sdrhilojkrg</h1>
     </Router>
   );
 }
